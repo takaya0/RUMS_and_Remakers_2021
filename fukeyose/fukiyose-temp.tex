@@ -1,0 +1,299 @@
+%=====================================
+%    この tex ファイルは『ふきよせ』
+%    の記事作成テンプレートです. 
+%=====================================
+
+% -----------------------
+% preamble
+% -----------------------
+% ここから本文 (\begin{document}) までの
+% ソースコードに変更を加えた場合は
+% 編集者まで連絡してください. 
+% Don't change preamble code yourself. 
+% If you add something
+% (usepackage, newtheorem, newcommand, renewcommand),
+% please tell it 
+% to the editor of institutional paper of RUMS.
+
+% ------------------------
+% documentclass
+% ------------------------
+\documentclass[11pt, a4paper, dvipdfmx]{jsarticle}
+
+% ------------------------
+% usepackage
+% ------------------------
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amscd}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage[psamsfonts]{amssymb}
+\usepackage{amsthm}
+\usepackage{ascmac}
+\usepackage{color}
+\usepackage{enumerate}
+\usepackage{fancybox}
+\usepackage[stable]{footmisc}
+\usepackage[dvips]{graphicx}
+\usepackage{listings}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{otf}
+%\usepackage{physics}
+\usepackage{pifont}
+\usepackage{proof}
+\usepackage{subfigure}
+\usepackage{thmbox}
+\usepackage{tikz}
+\usepackage{verbatim}
+\usepackage[all]{xy}
+
+\usetikzlibrary{cd}
+
+
+
+% ================================
+% パッケージを追加する場合のスペース 
+
+%=================================
+
+
+% --------------------------
+% theoremstyle
+% --------------------------
+\theoremstyle{definition}
+
+% --------------------------
+% newtheoem
+% --------------------------
+
+% 日本語で定理, 命題, 証明などを番号付きで用いるためのコマンドです. 
+% If you want to use theorem environment in Japanece, 
+% you can use these code. 
+% Attention!
+% All theorem enivironment numbers depend on 
+% only section numbers.
+\theoremstyle{definition}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%ここにないパッケージを入れる人は，必ずここに記載すること．
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%ここからはコード表です．
+%
+\newtheorem{Axiom}{公理}[section]
+\newtheorem{Definition}{定義}[section]
+\newtheorem{Theorem}{定理}[section]
+\newtheorem{Proposition}[Theorem]{命題}
+\newtheorem{Lemma}[Theorem]{補題}
+\newtheorem{Corollary}[Theorem]{系}
+\newtheorem{Example}{例}[section]
+\newtheorem{Claim}{主張}[section]
+\newtheorem{Property}{性質}[section]
+\newtheorem{Attention}{注意}[section]
+\newtheorem{Question}{問}[section]
+\newtheorem{Problem}{問題}[section]
+\newtheorem{Consideration}{考察}[section]
+\newtheorem{Alert}{警告}[section]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%定義や定理等に番号をつけたくない場合（例えば定理1.1等）は以下のコードを使ってください．
+%但し，例えば\Axiom*{}としてしまうと番号が付いてしまうので，必ず　\begin{Axiom*}　\end{Axiom*}の形で使ってください．
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%英語で定義や定理を書きたい場合こっちのコードを使うこと．
+\newtheorem{Axiom+}{Axiom}[section]
+\newtheorem[S]{Defi}[Axiom+]{Definition}
+\newtheorem[S]{Thm}[Axiom+]{Theorem}
+\newtheorem[S]{Prop}[Axiom+]{Proposition}
+\newtheorem[S]{Lem}[Axiom+]{Lemma}
+\newtheorem[S]{Ex}[Axiom+]{Example}
+\newtheorem[S]{Cor}[Axiom+]{Corollary}
+\newtheorem[S]{Prf}[Axiom+]{Proof}
+\newtheorem{Claim+}{Claim}
+\newtheorem{Property+}{Property}
+\newtheorem{Attention+}{Attention}
+\newtheorem{Question+}{Question}
+\newtheorem{Problem+}{Problem}
+\newtheorem{Consideration+}{Consideration}
+\newtheorem{Alert+}{Alert}
+%
+%
+% ----------------------------
+% commmand
+% ----------------------------
+% 執筆に便利なコマンド集です. 
+% コマンドを追加する場合は下のスペースへ. 
+
+% 集合の記号 (黒板文字)
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\KK}{\mathbb{K}}
+
+
+% 集合の記号 (太文字)
+\newcommand{\nn}{\mathbf{N}}
+\newcommand{\zz}{\mathbf{Z}}
+\newcommand{\qq}{\mathbf{Q}}
+\newcommand{\rr}{\mathbf{R}}
+\newcommand{\cc}{\mathbf{C}}
+\newcommand{\pp}{\mathbf{P}}
+\newcommand{\kk}{\mathbf{K}}
+
+% 特殊な写像の記号
+\newcommand{\ev}{\mathop{\mathrm{ev}}\nolimits} % 値写像
+\newcommand{\pr}{\mathop{\mathrm{pr}}\nolimits} % 射影
+
+% スクリプト体にするコマンド
+%   例えば　{\mcal C} のように用いる
+\newcommand{\mcal}{\mathcal}
+
+% 花文字にするコマンド 
+%   例えば　{\h C} のように用いる
+\newcommand{\h}{\mathscr}
+
+% ヒルベルト空間などの記号
+\newcommand{\F}{\mcal{F}}
+\newcommand{\X}{\mcal{X}}
+\newcommand{\Y}{\mcal{Y}}
+\newcommand{\Hil}{\mcal{H}}
+\newcommand{\RKHS}{\Hil_{k}}
+\newcommand{\Loss}{\mcal{L}_{D}}
+\newcommand{\MLsp}{(\X, \Y, D, \Hil, \Loss)}
+
+% 偏微分作用素の記号
+\newcommand{\p}{\partial}
+
+% 角カッコの記号 (内積は下にマクロがあります)
+\newcommand{\lan}{\langle}
+\newcommand{\ran}{\rangle}
+
+
+
+% 圏の記号など
+\newcommand{\Set}{{\bf Set}}
+\newcommand{\Vect}{{\bf Vect}}
+\newcommand{\FDVect}{{\bf FDVect}}
+\newcommand{\Ring}{{\bf Ring}}
+\newcommand{\Ab}{{\bf Ab}}
+\newcommand{\Mod}{\mathop{\mathrm{Mod}}\nolimits}
+\newcommand{\CGA}{{\bf CGA}}
+\newcommand{\GVect}{{\bf GVect}}
+\newcommand{\Lie}{{\bf Lie}}
+\newcommand{\dLie}{{\bf Liec}}
+
+
+
+% 射の集合など
+\newcommand{\Map}{\mathop{\mathrm{Map}}\nolimits}
+\newcommand{\Hom}{\mathop{\mathrm{Hom}}\nolimits}
+\newcommand{\End}{\mathop{\mathrm{End}}\nolimits}
+\newcommand{\Aut}{\mathop{\mathrm{Aut}}\nolimits}
+\newcommand{\Mor}{\mathop{\mathrm{Mor}}\nolimits}
+
+% その他便利なコマンド
+\newcommand{\dip}{\displaystyle} % 本文中で数式モード
+\newcommand{\e}{\varepsilon} % イプシロン
+\newcommand{\dl}{\delta} % デルタ
+\newcommand{\pphi}{\varphi} % ファイ
+\newcommand{\ti}{\tilde} % チルダ
+\newcommand{\pal}{\parallel} % 平行
+\newcommand{\op}{{\rm op}} % 双対を取る記号
+\newcommand{\lcm}{\mathop{\mathrm{lcm}}\nolimits} % 最小公倍数の記号
+\newcommand{\Probsp}{(\Omega, \F, \P)} 
+\newcommand{\argmax}{\mathop{\rm arg~max}\limits}
+\newcommand{\argmin}{\mathop{\rm arg~min}\limits}
+
+
+
+
+
+% ================================
+% コマンドを追加する場合のスペース 
+
+% =================================
+
+
+
+
+
+% ---------------------------
+% new definition macro
+% ---------------------------
+% 便利なマクロ集です
+
+% 内積のマクロ
+%   例えば \inner<\pphi | \psi> のように用いる
+\def\inner<#1>{\langle #1 \rangle}
+
+% ================================
+% マクロを追加する場合のスペース 
+
+%=================================
+
+
+
+
+
+% ----------------------------
+% documenet 
+% ----------------------------
+% 以下, 本文の執筆スペースです. 
+% Your main code must be written between 
+% begin document and end document.
+% ---------------------------
+
+\title{ふきよせテンプレート}
+\author{筆者名}
+\date{}
+\begin{document}
+\maketitle
+
+ふきよせのテンプレートです. 
+以下を書き換えて記事を作成してください. 
+がんば！
+
+\section{定理環境のサンプル}
+
+\begin{Definition}
+    定義定義定義定義定義
+\end{Definition}
+
+\begin{Defi}
+    definition definition definition
+\end{Defi}
+
+\subsection*{コマンド集のサンプル}
+プリアンブル(ソースコードの上の方に書いてあるコード)
+のコマンドを使った場合のサンプルを書いておきます. 
+\begin{itemize}
+    \item $\NN \QQ \RR \CC \PP \KK$
+    \item $\nn \qq \rr \cc \pp \kk$
+    \item $\pr_1:X\times Y \to X$
+    \item $\forall \e >0 \quad \exists \dl > 0 \quad 
+          \forall x \in U_{\dl}(a) \quad |f(x) - f(a)| < \e$
+    \item ${\mcal C} \simeq \Mod(R)$
+    \item ${\h C}^\op \to \Set$
+    \item $\inner<\pphi | \psi>$
+\end{itemize}
+
+%===============================================
+% 参考文献スペース
+%===============================================
+\begin{thebibliography}{20} 
+    \bibitem{ひ1} 筆者, 『本の名前』, 出版社, 出版年.
+    \bibitem{AB1} A.\ Author, B.\ Buthor, \textit{Title of The Book}, Publisher, 9999.
+\end{thebibliography}
+
+%===============================================
+
+
+
+
+\end{document}
