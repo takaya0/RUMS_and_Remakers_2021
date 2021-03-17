@@ -21,8 +21,11 @@
 
 \AtBeginSubsection[]	%サブセクションごとに目次を表示
 {\begin{frame}{Contents}
-    \tableofcontents[currentsubsection]
+    \begin{multicols}{2}
+        \tableofcontents[currentsubsection]
+    \end{multicols}
 \end{frame}}
+
 \newtheorem{defi}{Definition}
 \newtheorem{thm}[defi]{Theorem}
 \newtheorem{prop}[defi]{Proposition}
@@ -83,17 +86,19 @@
 }
 %-----------------------------------
 
-\title{Optimization on Riemannian Manifolds}
-\author{Takaya KOIZUMI}
-\institute{Department of Mathematical Science\\B4}
-\date{2021年1月28日 (木曜日)\\ 17:05～17:25}
+\title{Optimization Algorithms on Riemannian Manifolds and their Applications}
+\author{小泉 孝弥}
+\institute{立命館大学理工学部数理科学科4回生}
+\date{2021年3月15日 (月曜日)\\ 13:30$\sim$14:30}
 \begin{document}
     \begin{frame}\frametitle{}
         \titlepage
     \end{frame}
     \section*{Contents}
     \begin{frame}\frametitle{Contents}
-        \tableofcontents
+        \begin{multicols}{2}
+            \tableofcontents
+        \end{multicols}
     \end{frame}
 \section{About Optimization}
     \subsection{Optimization Problem}
@@ -121,15 +126,14 @@
         \end{exampleblock}        
     \end{frame}
     \begin{frame}
-        \frametitle{最適化数学が活躍する領域}
+        \frametitle{最適化数学と現実社会}
         現代社会において, 様々な分野で最適化は必要とされている.
         \begin{exampleblock}{Delivery Scope 問題}
             Covid-19の影響で, 店舗配達の需要が増加し, 店舗の配達可能区域を決める必要性が高まった.
             できるだけ需要を高くした上で, 制限時間の間にお客に商品を届けることができる領域を求める問題.
         \end{exampleblock}
         \begin{exampleblock}{高次元目的関数最適化問題}
-            データが簡単に収集しやすくなり, 高次元(1000から何千億次元)で複雑な目的関数
-            の最適化の需要が高まっている(特に, 機械学習). 
+            高次元(何千億次元)で複雑な目的関数を最適化する問題(特に, 機械学習). 
         \end{exampleblock} 
     \end{frame}
     \subsection{Optimization Algorithm}
@@ -225,39 +229,9 @@
         \end{align*}
         と定めれば, $g_{X}$は内積となるので, $\operatorname{St}(p, n)$はリーマン多様体である. 
     \end{frame}
-    \subsection{Grassmann Manifold}
-    \begin{frame}
-        \frametitle{具体例その3}
-        $\R^{n\times p}_* = \{X\in\R^{n\times p}\mid \operatorname{rank}(X) = p\}$とする. 
-        \begin{defi}[Grassmann Manifold]
-            $\R^{n\times p}_{*}$上に二項関係$\sim$を
-            \begin{align*}
-                X\sim Y \iff \operatorname{span}(X) = \operatorname{span}(Y)
-            \end{align*}
-            と定義すると, $\sim$は同値関係になる. この時, 商空間$\R^{n\times p }_{*}/\sim$は, 
-            可微分多様体となる. この多様体を, グラスマン多様体(Grassmann Manifold)といい, $\operatorname{Grass}(p, n)$と
-            表す. 
-        \end{defi}
-        $p = 1$の時, $\operatorname{Grass}(1, n)$は射影空間$\R\mathbb{P}^{n - 1}$である. 
-    \end{frame}
-    \begin{frame}
-        \frametitle{}
-        \begin{prop}[基底の変換と特殊線形群]
-            $X, Y\in\R^{n\times p}_{*}$について, 
-            \begin{align*}
-                \operatorname{span}(X) = \operatorname{span}(Y)\iff \exists M\in \operatorname{GL}_p(\R)\text{ s.t. } Y = XM
-            \end{align*}
-            が成立する. 
-        \end{prop}
-        これによって$\operatorname{Grass}(p, n) = R^{n\times p}_{*}/\operatorname{GL}_p(\R)$となる. 
-        また, $g_{\operatorname{span}(X)} : T_{\operatorname{span}(X)}\operatorname{Grass}(p, n)\times T_{\operatorname{span}(X)}\operatorname{Grass}(p, n)\to\R$を
-        \begin{align*}
-            g_{\operatorname{span}(X)}(\xi, \eta) = \operatorname{tr}\left(\left(X^{T} X\right)^{-1} \overline{\xi}^{T} \overline{\eta}\right)
-        \end{align*}
-        と定義する. ただし, $\overline{\xi}, \overline{\eta}$はそれぞれ, $\xi, \eta$のhorizontal liftである.
-        この時, $g_{\operatorname{span}(X)}$は代表元のとり方によらず内積の定義を満たすので, $\operatorname{Grass}(p, n)$はリーマン多様体となる.
-    \end{frame}
-\section{Optimization on Sphere}
+ 
+    
+\section{Optimization Problem on Sphere}
     \subsection{Minimization of quadratic form}
     \begin{frame}
         \frametitle{行列の最大・最小固有値問題とリーマン多様体}
@@ -300,7 +274,7 @@
         \end{exampleblock}
         また, $q_{A}$を$-q_{A}$とすれば最大固有値も求めることもできる. 
     \end{frame}
-    \subsection{Riemannian Gradient Decent on Sphere}
+    \subsection{RGD on Sphere}
     \begin{frame}
         \frametitle{勾配降下法の問題点}
         先の最適化問題を解くために, ユークリッド空間上の勾配降下法を球面上に拡張する. 
@@ -344,7 +318,7 @@
             \begin{align*}
                 P_{x}(\xi) = (\mathbb{I}_{n} - xx^{\top})\xi
             \end{align*}
-            となる. 
+            で与えられる. 
         \end{prop}
     \end{frame}
     \subsection{Experiments}
@@ -365,7 +339,7 @@
             とする. この時, $A$の固有値は$\lambda_{1} = 1, \lambda_{2} = 6$
             である. また, $q_{A}(x, y) = 2x^2 + 4xy + 5y^2$より, 
             \begin{align*}
-                \mathrm{grad}_{\R^2}f(x) = (4(x + y), 4x + 10y)^{\top}
+                \mathrm{grad}_{\R^2}q_A(x, y) = (4(x + y), 4x + 10y)^{\top}
             \end{align*}
             である. 
         \end{exampleblock}
@@ -378,11 +352,11 @@
             \begin{tabular}{c}
                 \begin{minipage}{0.55\hsize}
                     \centering
-                    \includegraphics[width = 6.3cm]{result.png}
+                    \includegraphics[width = 6.3cm]{Images/result_min.png}
                 \end{minipage}
                 \begin{minipage}{0.45\hsize}
                     \centering
-                    \includegraphics[width = 5.5cm]{eign_vec_min.png}
+                    \includegraphics[width = 5.5cm]{Images/eign_vec_min.png}
                 \end{minipage}
             \end{tabular}   
         \end{figure}  
@@ -396,23 +370,160 @@
             \begin{tabular}{c}
                 \begin{minipage}{0.55\hsize}
                     \centering
-                    \includegraphics[width = 6.3cm]{result_max.png}
+                    \includegraphics[width = 6.3cm]{Images/result_max.png}
                 \end{minipage}
                 \begin{minipage}{0.45\hsize}
                     \centering
-                    \includegraphics[width = 5.5cm]{eign_vec_max.png}
+                    \includegraphics[width = 5.5cm]{Images/eign_vec_max.png}
                 \end{minipage}
             \end{tabular}   
         \end{figure}  
+    \end{frame}
+\section{Optimization Problem on Stiefel Manifold}
+    \subsection{Principle Component Analysis}
+    \begin{frame}
+        \frametitle{データの要約と主成分分析}
+        \textbf{主成分分析}(Principle Component Analysis, PCA)とは$n$次元データ$\{x_i\}_{i = 1}^{N}\subset\R^n$をよく表現する正規ベクトル(大きさが1のベクトル)を見つける方法論.
+        簡単にいうと, 以下のような赤線を見つけること.
+        \begin{figure}
+            \includegraphics[width=6.0cm]{Images/data_pc1.png}
+        \end{figure}
+        これ以降, データの平均は0, 分散は1とする. 
+    \end{frame}
+    \begin{frame}
+        \frametitle{赤線の見つけ方}
+        正規ベクトル$v_1$が$n$次元データ$\{x_i\}_{i = 1}^{N}\subset\R^n$を一番よく表現(近似)するというのは, 
+        $v_1$にデータを射影した時に, 射影前との誤差が最小になるということ. 
+        すなわち, $x\in\R^n$の$\operatorname{span}\{v_1\}$への直交射影は
+        $v_1v_1^{\top}x$で与えられるから, 
+        \begin{align}
+            \argmin_{\|v_1\| = 1}\frac{1}{N}\sum_{i = 1}^{N}\|x_i - v_1v_1^{\top}x_i\|^2
+        \end{align}
+        を求めること!. 
+    \end{frame}
+    \begin{frame}
+        \frametitle{標本共分散行列との繋がり}
+        $\|x_i - v_1v_1^{\top}x_i\|^2 = x_i^{\top}x_i - x_i^\top v_1v_1^\top x_i$だから, 先ほどの(1)式は以下と同値.
+        \begin{align}
+            \argmax_{\|v_1\| = 1}\frac{1}{N}\sum_{i = 1}^{N}x_i^\top v_1v_1^\top x_i
+        \end{align}
+        ここで, データ$\{x_i\}_{i = 1}^{N}$の平均は0だから, $\{x_i\}_{i = 1}^{N}$の標本共分散行列$C$は
+        $C = \frac{1}{N}\sum_{i = 1}^{N}x_ix_i^\top$で与えられるので, 
+        \begin{align*}
+            \argmax_{\|v_1\| = 1}\frac{1}{N}\sum_{i = 1}^{N}x_i^\top v_1v_1^\top x_i = \argmax_{\|v_1\| = 1}v_1^{\top}Cv_1
+        \end{align*}
+        となる. $\to$ $C$は対称行列だから, 実はさっきやった問題と同じになる.
+    \end{frame}
+    \subsection{Stiefel Manifold and PCA}
+    \begin{frame}
+        \frametitle{第$p$主成分}
+        先ほどは, データ$\{x_i\}_{i = 1}^N$を一番近似する正規ベクトル$v_1$を
+        求めた. この$v_1$を\textbf{第1主成分}(PC1)という. また, データを2番目によく近似し, $v_1$と直交する
+        正規ベクトル$v_2$を\textbf{第2主成分}(PC2)という. 一般に, $v_1, v_2, \ldots, v_{p-1} (p < n)$と直交し,
+        データを$p$番目によく近似する正規ベクトル$v_k$を\textbf{第$p$主成分}(PC p)という. 
+        \begin{block}{主成分分析} 
+            $n$次元データが与えられた時, 上で定めたデータを近似する$1\leq p\leq n$個の
+            正規直交基底$\{v_i\}_{i = 1}^p$を求めること.           
+        \end{block}
+    \end{frame}
+    \begin{frame}
+        \frametitle{$p$次元への直交射影}
+        前スライドより, 主成分$\{v_i\}_{i = 1}^p$を求めるためには以下の最適化問題を解けば良い.
+        \begin{align*}
+            \argmin_{v_{1}, v_{2}, \ldots, v_{p} : ONS} \frac{1}{N} \sum_{i=1}^{N}\|x_{i}-(v_{1} v_{1}^{T}+\cdots+v_{p} v_{p}^{T}) x_{i}\|^{2}
+        \end{align*}
+        ここで, $\{v_i\}_{i = 1}^p$は正規直交規定だから$(v_{1} v_{1}^{T}+\cdots+v_{p} v_{p}^{T}) x$は$x\in\R^n$の$\operatorname{span}\{v_1, v_2,\ldots, v_p\}$
+        への直交射影である($V = [v_1, v_2, \ldots, v_p]\in\R^{n\times p}$とした時, $V(V^{\top}V)^{-1}V^{\top} = VV^{\top}$). また, $p = 1$の時と同様に考えれば上記の式は
+        \begin{align*}
+            \argmax_{v_{1}, v_{2}, \ldots, v_{p} : ONS} v_1^{\top}Cv_1 + v_2^{\top}Cv_2 + \cdots + v_p^{\top}Cv_p
+        \end{align*}
+        と同値. また, ここでトレースの定義より, 以下のようにかける. 
+        \begin{align*}
+            v_1^{\top}Cv_1 + v_2^{\top}Cv_2 + \cdots + v_p^{\top}Cv_p = \operatorname{tr}(V^{\top}CV)
+        \end{align*}  
+    \end{frame}
+    \begin{frame}
+        \frametitle{シュティーフェル多様体と主成分分析}
+        前スライドの議論と, シュティーフェル多様体が正規直交基底をなす$n\times p$の集合
+        であることを考えれば, 主成分分析は以下のようなシュティーフェル多様体$\operatorname{St}(p, n)$上の
+        最適化問題と考えることができる. 
+        \begin{exampleblock}{}
+            $C$をデータの標本共分散行列とする.
+            \begin{mpproblem*}
+                \begin{alignat*}{2}
+                    &\text{minimize}   & \quad F(X) = - \operatorname{tr}(V^{\top}CV)\\
+                    &\text{subject to} & \quad V\in\operatorname{St}(p, n)   
+                \end{alignat*}
+            \end{mpproblem*}
+        \end{exampleblock}   
+    \end{frame}
+    \subsection{RGD on Stiefel Manifold}
+    \begin{frame}
+        \frametitle{最適化の準備 : 行列の極分解}
+        球面上の二次形式最小化問題の時と同様に, 勾配降下法をシュティーフェル多様体に拡張し
+        解くことにする. しかし, これまた球面上に拡張した時と同様に$x - t\mathrm{grad}F(X)\notin\operatorname{St}(p, n)$と
+        なる問題が発生する. 今回は, これを解決するために行列の極分解(polar decomposition)を利用する.
+        \begin{prop}[行列の極分解]
+            任意の実行列$A\in\R^{m\times n}$は直交行列$U$と半正定値対称行列$P$を用いて
+            \begin{align*}
+                A = UP
+            \end{align*}
+            と分解できる. 
+        \end{prop}
+    \end{frame}
+    \begin{frame}
+        \frametitle{シュティーフェル多様体上の勾配降下法}
+        \begin{algorithm}[H]
+            \caption{Riemannian Gradient Decent on Stiefel Manifold}
+            \begin{algorithmic}
+                \REQUIRE $F$: differentiable function on $\operatorname{St}(p, n)$
+                \REQUIRE $0< t <1$ : 
+                \STATE $X\leftarrow X_{0}\in\operatorname{St}(p, n)$
+                \WHILE{$X$ not converged} 
+                \STATE $d = -t~\mathrm{grad} F(X)$
+                \STATE $X\leftarrow (X + d)(\mathbb{I}_{p} + d^{\top}d)^{-1/2}$ 
+                \ENDWHILE
+                \RETURN $X$
+            \end{algorithmic}
+        \end{algorithm}
+        なお, アルゴリズム中の$(X + d)(\mathbb{I}_{p} + d^{\top}d)^{-1/2}$が, $X + d$の
+        極分解の$U$に対応している. 
+    \end{frame}
+    \begin{frame}
+        \frametitle{シュティーフェル多様体上の勾配の求め方}
+        \begin{prop}[シュティーフェル多様体の勾配と直交射影]
+            目的関数$F:\R^{n\times p}\to\R$を$\operatorname{St}(p, n)$に制限した関数を$\overline{F}:\operatorname{St}(p, n)\to\R$
+            とする. この時, $X\in\operatorname{St}(p, n)$について, $P_X : T_{X}\R^{n\times p}\to T_{x}\operatorname{St}(p, n)$を
+            $T_{X}\R^{n\times p} = \R^{n\times p}$から閉部分空間$T_{X}\operatorname{St}(p, n)$への直交射影とすれば,
+            \begin{align*}
+                \mathrm{grad} \overline{F}(x) = P_{X}(\mathrm{grad}_{\R^{n\times p}}F(X))
+            \end{align*}
+            が成立する. また, 直交射影$P_X$は 
+            \begin{align*}
+                P_{X}(\xi)=\left(I-X X^{T}\right) \xi+X \operatorname{skew}\left(X^{T} \xi\right)
+            \end{align*}
+            で与えられる. ただし, $\operatorname{skew}(A) = \frac{1}{2}(A - A^\top)$.
+        \end{prop}
+    \end{frame}
+    \section*{Conclution}
+    \begin{frame}
+        \frametitle{興味が出てきた人のために}
+        \begin{enumerate}
+            \item 球やシュティーフェルの他にも, 実問題では Grassmann Manifoldなど他の多様体も登場する.
+            \item アルゴリズムに出てきた, 集合に戻すという写像をレトラクション(Retraction)という形で一般化される\cite{absil}. 
+            \item 最近, 一部のリーマン多様体においてレトラクションがいらないという話が出てきた\cite{noretract}.
+        \end{enumerate}
     \end{frame}
 \section*{References}
     \begin{frame}\frametitle{References}
         \begin{thebibliography}{9}
             \beamertemplatetextbibitems
-            \bibitem{} P.-A. ABSIL, R. MAHONY, AND R. SEPULCHRE, Optimization Algorithms on Matrix Manifolds, 
+            \bibitem{absil} P.-A. ABSIL, R. MAHONY, AND R. SEPULCHRE, Optimization Algorithms on Matrix Manifolds, 
                        Princeton University Press, Princeton, NJ, 2008.
             \bibitem{qform} https://www.cck.dendai.ac.jp/math/support/advance/2次形式.pdf, 東京電機大学
             \bibitem{sato} 佐藤 寛之, 曲がった空間での最適化, 日本オペレーションズ・リサーチ学会, オペレーションズ・リサーチ Vol.60 9月号, 2015
+            \bibitem{satoi} 佐藤一宏, 線形数理要論(第8回), \url{http://www.kazuhirosato.work/entry/senkeisuriyoron_2020}, 2020
+            \bibitem{noretract} Pierre Ablin and Gabriel Peyré, Fast and accurate optimization on the orthogonal manifold without retraction, \url{https://arxiv.org/abs/2102.07432}, 2021
 	    \end{thebibliography}
     \end{frame}
 \end{document}

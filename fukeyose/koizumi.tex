@@ -277,9 +277,9 @@
 \begin{Defi}[データ]
     $(\Omega, \mathcal{F}, \mathbb{P})$を確率空間, $\rho$を$\X\times\Y$上の確率分布とする.
     $\{(X_n, Y_n)\}_{n = 1}^{N}$を$\rho$に従う独立な確率変数列とした時, $\{(X_n, Y_n)\}_{n = 1}^{N}$の観測値$\{(X_n(\omega), Y_n(\omega))\}_{n = 1}^{N}$
-    のことを教師ありデータと呼び, $D = \{(x_n, y_n)\}_{n = 1}^{N}$と表記する.　同様に, $\rho$を$\X$上の確率分布とし,
+    のことを教師ありデータと呼び, $\{(x_n, y_n)\}_{n = 1}^{N}$と表記する.　同様に, $\rho$を$\X$上の確率分布とし,
     $\{X_n\}_{n = 1}^{N}$を$\rho$に従う独立な確率変数列とした時, $\{X_n\}_{n = 1}^{N}$の観測値$\{X_n(\omega)\}_{n = 1}^{N}$
-    のことを教師なしデータと呼び$\{x_n\}_{n = 1}^{N}$
+    のことを教師なしデータと呼び$\{x_n\}_{n = 1}^{N}$と表記する. また, 両者をまとめてデータと呼び$D$で表す.
 \end{Defi}
 \begin{Defi}[汎化誤差, 損失関数]
     $\Hil$を仮説空間, $(\Omega, \mathcal{F}, \mathbb{P})$を確率空間, $\rho$をデータの確率分布とする.
@@ -687,7 +687,7 @@ $D = \{(x_i, y_i)\}_{i = 1}^{N}\subset\X\times\Y$を教師ありデータとす�
 \begin{algorithm}[H]
     \caption{Stchastic Gradient Decent}
     \begin{algorithmic}
-        \STATE $0 < \alpha\leq 1$: learning rate
+        \REQUIRE $0 < \alpha\leq 1$: learning rate
         \REQUIRE $\theta_{0}$: Initial parameter vector
         \STATE $\theta\leftarrow\theta_{0}$
         \WHILE{$\theta$ not converged}
@@ -960,3 +960,4 @@ Cycle-GANは2つのGANを用意することにより, 画像の変換をする�
 
 
 \end{document}
+
